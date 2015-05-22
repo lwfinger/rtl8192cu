@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -115,7 +115,7 @@
 #define MPT_GET_THERMAL_METER		33
 #endif
 
-#define MAX_MP_XMITBUF_SZ 	2048
+#define MAX_MP_XMITBUF_SZ	2048
 #define NR_MP_XMITFRAME		8
 
 struct mp_xmit_frame
@@ -242,7 +242,7 @@ typedef struct _MPT_CONTEXT
 	// _TEST_MODE, defined in MPT_Req2.h
 	ULONG			MptTestItem;
 	// Variable needed in each implementation of CurrMptAct.
-	ULONG			MptActType; 	// Type of action performed in CurrMptAct.
+	ULONG			MptActType;	// Type of action performed in CurrMptAct.
 	// The Offset of IO operation is depend of MptActType.
 	ULONG			MptIoOffset;
 	// The Value of IO operation is depend of MptActType.
@@ -251,9 +251,9 @@ typedef struct _MPT_CONTEXT
 	ULONG			MptRfPath;
 
 	WIRELESS_MODE		MptWirelessModeToSw;	// Wireless mode to switch.
-	u8			MptChannelToSw; 	// Channel to switch.
-	u8			MptInitGainToSet; 	// Initial gain to set.
-	//ULONG			bMptAntennaA; 		// TRUE if we want to use antenna A.
+	u8			MptChannelToSw;		// Channel to switch.
+	u8			MptInitGainToSet;	// Initial gain to set.
+	//ULONG			bMptAntennaA;		// TRUE if we want to use antenna A.
 	ULONG			MptBandWidth;		// bandwidth to switch.
 	ULONG			MptRateIndex;		// rate index.
 	// Register value kept for Single Carrier Tx test.
@@ -267,14 +267,14 @@ typedef struct _MPT_CONTEXT
 	ULONG			MptRCR;
 	// TRUE if we only receive packets with specific pattern.
 	BOOLEAN			bMptFilterPattern;
- 	// Rx OK count, statistics used in Mass Production Test.
- 	ULONG			MptRxOkCnt;
- 	// Rx CRC32 error count, statistics used in Mass Production Test.
- 	ULONG			MptRxCrcErrCnt;
+	// Rx OK count, statistics used in Mass Production Test.
+	ULONG			MptRxOkCnt;
+	// Rx CRC32 error count, statistics used in Mass Production Test.
+	ULONG			MptRxCrcErrCnt;
 
 	BOOLEAN			bCckContTx;	// TRUE if we are in CCK Continuous Tx test.
- 	BOOLEAN			bOfdmContTx;	// TRUE if we are in OFDM Continuous Tx test.
-	BOOLEAN			bStartContTx; 	// TRUE if we have start Continuous Tx test.
+	BOOLEAN			bOfdmContTx;	// TRUE if we are in OFDM Continuous Tx test.
+	BOOLEAN			bStartContTx;	// TRUE if we have start Continuous Tx test.
 	// TRUE if we are in Single Carrier Tx test.
 	BOOLEAN			bSingleCarrier;
 	// TRUE if we are in Carrier Suppression Tx Test.
@@ -318,8 +318,8 @@ typedef struct _MPT_CONTEXT
 
 /* end of E-Fuse */
 
-//#define RTPRIV_IOCTL_MP 					( SIOCIWFIRSTPRIV + 0x17)
-enum {	  
+//#define RTPRIV_IOCTL_MP					( SIOCIWFIRSTPRIV + 0x17)
+enum {
 	WRITE_REG = 1,
 	READ_REG,
 	WRITE_RF,
@@ -446,7 +446,7 @@ struct bb_reg_param {
 };
 //=======================================================================
 
-#define LOWER 	_TRUE
+#define LOWER	_TRUE
 #define RAISE	_FALSE
 
 /* Hardware Registers */
@@ -487,17 +487,17 @@ typedef enum _MP_MODE_ {
 } MP_MODE;
 
 #ifdef CONFIG_RTL8192C
-#define RF_PATH_A 	RF_PATH_A
-#define RF_PATH_B 	RF_PATH_B
-#define RF_PATH_C 	RF_PATH_C
-#define RF_PATH_D 	RF_PATH_D
+#define RF_PATH_A	RF_PATH_A
+#define RF_PATH_B	RF_PATH_B
+#define RF_PATH_C	RF_PATH_C
+#define RF_PATH_D	RF_PATH_D
 
 #define MAX_RF_PATH_NUMS	RF_PATH_MAX
 #else
-#define RF_PATH_A 	0
-#define RF_PATH_B 	1
-#define RF_PATH_C 	2
-#define RF_PATH_D 	3
+#define RF_PATH_A	0
+#define RF_PATH_B	1
+#define RF_PATH_C	2
+#define RF_PATH_D	3
 
 #define MAX_RF_PATH_NUMS	2
 #endif
@@ -567,7 +567,7 @@ typedef enum _POWER_MODE_ {
 #define RPTMaxCount 0x000FFFFF;
 
 // parameter 1 : BitMask
-// 	bit 0  : OFDM PPDU
+//	bit 0  : OFDM PPDU
 //	bit 1  : OFDM False Alarm
 //	bit 2  : OFDM MPDU OK
 //	bit 3  : OFDM MPDU Fail
@@ -607,10 +607,10 @@ typedef enum _ENCRY_CTRL_STATE_ {
 }ENCRY_CTRL_STATE;
 
 typedef enum _OFDM_TX_MODE {
-	OFDM_ALL_OFF		= 0,	
+	OFDM_ALL_OFF		= 0,
 	OFDM_ContinuousTx	= 1,
 	OFDM_SingleCarrier	= 2,
-	OFDM_SingleTone 	= 4,
+	OFDM_SingleTone		= 4,
 } OFDM_TX_MODE;
 
 //=======================================================================
@@ -709,4 +709,3 @@ extern void Hal_SetOFDMContinuousTx(PADAPTER pAdapter, u8 bStart);
 extern void Hal_ProSetCrystalCap (PADAPTER pAdapter , u32 CrystalCapVal);
 
 #endif //_RTW_MP_H_
-

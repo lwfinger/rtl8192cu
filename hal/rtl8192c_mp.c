@@ -124,7 +124,7 @@ void Hal_mpt_SwitchRfSetting(PADAPTER pAdapter)
 			{
 				write_rfreg(pAdapter, 0, RF_SYN_G2, 0x0F400);
 			}
-			else 											//OFDM~MCS rate
+			else											//OFDM~MCS rate
 			{
 				write_rfreg(pAdapter, 0, RF_SYN_G2, 0x4F000);
 			}
@@ -180,7 +180,7 @@ void Hal_mpt_SwitchRfSetting(PADAPTER pAdapter)
 			{
 				write_rfreg(pAdapter, 0, RF_SYN_G2, 0x0F400);
 			}
-			else 	//OFDM~MCS rate
+			else	//OFDM~MCS rate
 			{
 				write_rfreg(pAdapter, 0, RF_SYN_G2, 0x4F200);
 			}
@@ -446,7 +446,7 @@ void Hal_SetChannel(PADAPTER pAdapter)
 //	SelectChannel(pAdapter, pmp->channel);
 	set_channel_bwmode(pAdapter, pmp->channel, pmp->channel_offset, pmp->bandwidth);
 #else
-	u8 		eRFPath;
+	u8		eRFPath;
 
 	HAL_DATA_TYPE	*pHalData = GET_HAL_DATA(pAdapter);
 	struct mp_priv	*pmp = &pAdapter->mppriv;
@@ -695,9 +695,9 @@ void Hal_SetAntenna(PADAPTER pAdapter)
 		case ANTENNA_A:
 			p_ofdm_tx->r_tx_antenna		= 0x1;
 			r_ofdm_tx_en_val		= 0x1;
-			p_ofdm_tx->r_ant_l 		= 0x1;
-			p_ofdm_tx->r_ant_ht_s1 		= 0x1;
-			p_ofdm_tx->r_ant_non_ht_s1 	= 0x1;
+			p_ofdm_tx->r_ant_l		= 0x1;
+			p_ofdm_tx->r_ant_ht_s1		= 0x1;
+			p_ofdm_tx->r_ant_non_ht_s1	= 0x1;
 			p_cck_txrx->r_ccktx_enable	= 0x8;
 			chgTx = 1;
 
@@ -726,9 +726,9 @@ void Hal_SetAntenna(PADAPTER pAdapter)
 		case ANTENNA_B:
 			p_ofdm_tx->r_tx_antenna		= 0x2;
 			r_ofdm_tx_en_val		= 0x2;
-			p_ofdm_tx->r_ant_l 		= 0x2;
-			p_ofdm_tx->r_ant_ht_s1 		= 0x2;
-			p_ofdm_tx->r_ant_non_ht_s1 	= 0x2;
+			p_ofdm_tx->r_ant_l		= 0x2;
+			p_ofdm_tx->r_ant_ht_s1		= 0x2;
+			p_ofdm_tx->r_ant_non_ht_s1	= 0x2;
 			p_cck_txrx->r_ccktx_enable	= 0x4;
 			chgTx = 1;
 
@@ -759,9 +759,9 @@ void Hal_SetAntenna(PADAPTER pAdapter)
 		case ANTENNA_AB:	// For 8192S
 			p_ofdm_tx->r_tx_antenna		= 0x3;
 			r_ofdm_tx_en_val		= 0x3;
-			p_ofdm_tx->r_ant_l 		= 0x3;
-			p_ofdm_tx->r_ant_ht_s1 		= 0x3;
-			p_ofdm_tx->r_ant_non_ht_s1 	= 0x3;
+			p_ofdm_tx->r_ant_l		= 0x3;
+			p_ofdm_tx->r_ant_ht_s1		= 0x3;
+			p_ofdm_tx->r_ant_non_ht_s1	= 0x3;
 			p_cck_txrx->r_ccktx_enable	= 0xC;
 			chgTx = 1;
 
@@ -804,22 +804,22 @@ void Hal_SetAntenna(PADAPTER pAdapter)
 	switch (pAdapter->mppriv.antenna_rx)
 	{
 		case ANTENNA_A:
-			r_rx_antenna_ofdm 		= 0x1;	// A
-			p_cck_txrx->r_cckrx_enable 	= 0x0;	// default: A
+			r_rx_antenna_ofdm		= 0x1;	// A
+			p_cck_txrx->r_cckrx_enable	= 0x0;	// default: A
 			p_cck_txrx->r_cckrx_enable_2	= 0x0;	// option: A
 			chgRx = 1;
 			break;
 
 		case ANTENNA_B:
-			r_rx_antenna_ofdm 		= 0x2;	// B
-			p_cck_txrx->r_cckrx_enable 	= 0x1;	// default: B
+			r_rx_antenna_ofdm		= 0x2;	// B
+			p_cck_txrx->r_cckrx_enable	= 0x1;	// default: B
 			p_cck_txrx->r_cckrx_enable_2	= 0x1;	// option: B
 			chgRx = 1;
 			break;
 
 		case ANTENNA_AB:
-			r_rx_antenna_ofdm 		= 0x3;	// AB
-			p_cck_txrx->r_cckrx_enable 	= 0x0;	// default:A
+			r_rx_antenna_ofdm		= 0x3;	// AB
+			p_cck_txrx->r_cckrx_enable	= 0x0;	// default:A
 			p_cck_txrx->r_cckrx_enable_2	= 0x1;	// option:B
 			chgRx = 1;
 			break;
@@ -880,7 +880,7 @@ s32 Hal_SetThermalMeter(PADAPTER pAdapter, u8 target_ther)
 
 void Hal_TriggerRFThermalMeter(PADAPTER pAdapter)
 {
-  
+
 	write_rfreg(pAdapter, RF_PATH_A, RF_T_METER, 0x60);	// 0x24: RF Reg[6:5]
 
 //	RT_TRACE(_module_mp_,_drv_alert_, ("TriggerRFThermalMeter() finished.\n" ));
@@ -987,7 +987,7 @@ void Hal_SetSingleToneTx(PADAPTER pAdapter, u8 bStart)
 		write_bbreg(pAdapter, rFPGA0_RFMOD, bOFDMEn, 0x0);
 
 		if (is92C)
-       		 {
+		 {
 			_write_rfreg(pAdapter, RF_PATH_A, 0x21, BIT19, 0x01);
 			rtw_usleep_os(100);
 			if (rfPath == RF_PATH_A)
@@ -998,7 +998,7 @@ void Hal_SetSingleToneTx(PADAPTER pAdapter, u8 bStart)
 			write_rfreg(pAdapter, rfPath, 0x21, 0xd4000);
 			rtw_usleep_os(100);
 		}
-		
+
 		write_rfreg(pAdapter, rfPath, 0x00, 0x2001f); // PAD all on.
 		rtw_usleep_os(100);
 	}
@@ -1022,7 +1022,7 @@ void Hal_SetSingleToneTx(PADAPTER pAdapter, u8 bStart)
 			rtw_usleep_os(100);
 		}
 	}
-	
+
 }
 
 

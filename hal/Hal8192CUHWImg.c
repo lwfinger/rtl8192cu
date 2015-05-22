@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -6046,7 +6046,7 @@ u8 Rtl8192CUFwUMCBCutImgArray[UMCBCutImgArrayLength] = {
 #endif
 
 //8188C_Formal_All_PHYforMP_111117	2011-11-23
-//8192C_Formal_92CU_PHYforMP_110817 	2011-11-23
+//8192C_Formal_92CU_PHYforMP_110817	2011-11-23
 
 u32 Rtl8192CUPHY_REG_2TArray[PHY_REG_2TArrayLength] = {
 0x024,0x0011800f,
@@ -8755,4 +8755,3 @@ u32 Rtl8192CUAGCTAB_1T_HPArray[AGCTAB_1T_HPArrayLength] = {
 0xc78,0x621e001e,
 0xc78,0x621f001e,
 };
-

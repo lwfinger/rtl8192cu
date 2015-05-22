@@ -1,7 +1,7 @@
 /******************************************************************************
  *
  * Copyright(c) 2007 - 2011 Realtek Corporation. All rights reserved.
- *                                        
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of version 2 of the GNU General Public License as
  * published by the Free Software Foundation.
@@ -67,7 +67,7 @@
 
 //#define CONFIG_TCP_CSUM_OFFLOAD_RX	1
 
-//#define CONFIG_BEFORE_LINKED_DIG	
+//#define CONFIG_BEFORE_LINKED_DIG
 //#define CONFIG_DRVEXT_MODULE	1
 
 #ifndef CONFIG_MP_INCLUDED
@@ -75,7 +75,7 @@
 	#ifdef CONFIG_IPS
 		//#define CONFIG_IPS_LEVEL_2	1 //enable this to set default IPS mode to IPS_LEVEL_2
 	#endif
-	
+
 	#define SUPPORT_HW_RFOFF_DETECTED	1
 
 	#define CONFIG_LPS	1
@@ -83,24 +83,24 @@
 
 	//befor link
 	#define CONFIG_ANTENNA_DIVERSITY
-	
+
 	//after link
 	#ifdef CONFIG_ANTENNA_DIVERSITY
-		#define CONFIG_SW_ANTENNA_DIVERSITY	 
-		//#define CONFIG_HW_ANTENNA_DIVERSITY	
+		#define CONFIG_SW_ANTENNA_DIVERSITY
+		//#define CONFIG_HW_ANTENNA_DIVERSITY
 	#endif
 
 	#define CONFIG_IOL
-#else 	//#ifndef CONFIG_MP_INCLUDED
+#else	//#ifndef CONFIG_MP_INCLUDED
 	#define CONFIG_MP_IWPRIV_SUPPORT	1
-#endif 	//#ifndef CONFIG_MP_INCLUDED
+#endif	//#ifndef CONFIG_MP_INCLUDED
 
 #define CONFIG_AP_MODE	1
 #ifdef CONFIG_AP_MODE
 	#define CONFIG_NATIVEAP_MLME	1
 	#ifndef CONFIG_NATIVEAP_MLME
 		#define CONFIG_HOSTAPD_MLME	1
-	#endif			
+	#endif
 	#define CONFIG_FIND_BEST_CHANNEL	1
 	//#define CONFIG_NO_WIRELESS_HANDLERS	1
 #endif
@@ -111,7 +111,7 @@
 	//Added by Albert 20110812
 	//The CONFIG_WFD is for supporting the Wi-Fi display
 	#define CONFIG_WFD
-	
+
 	#ifndef CONFIG_WIFI_TEST
 		#define CONFIG_P2P_REMOVE_GROUP_INFO
 	#endif
@@ -123,10 +123,10 @@
 	#define P2P_OP_CHECK_SOCIAL_CH
 		// Added comment by Borg 2013/06/21
 		// Issue:  Nexus 4 is hard to do miracast.
-		// Root Cause: After group formation, 
-		//			Nexus 4 is possible to be not at OP channel of Invitation Resp/Nego Confirm but at social channel. 
-		// Patch: While scan OP channel, 
-		//		 not only scan OP channel of Invitation Resp/Nego Confirm, 
+		// Root Cause: After group formation,
+		//			Nexus 4 is possible to be not at OP channel of Invitation Resp/Nego Confirm but at social channel.
+		// Patch: While scan OP channel,
+		//		 not only scan OP channel of Invitation Resp/Nego Confirm,
 		//		 but also scan social channel(1, 6, 11)
 #endif
 
@@ -197,7 +197,7 @@
 /*
  * Interface  Related Config
  */
- 
+
 //#define CONFIG_USB_ONE_OUT_EP
 //#define CONFIG_USB_INTERRUPT_IN_PIPE	1
 
@@ -210,7 +210,7 @@
 //#define CONFIG_REDUCE_USB_TX_INT	1	// Trade-off: Improve performance, but may cause TX URBs blocked by USB Host/Bus driver on few platforms.
 //#define CONFIG_EASY_REPLACEMENT	1
 
-/* 
+/*
  * CONFIG_USE_USB_BUFFER_ALLOC_XX uses Linux USB Buffer alloc API and is for Linux platform only now!
  */
 //#define CONFIG_USE_USB_BUFFER_ALLOC_TX 1	// Trade-off: For TX path, improve stability on some platforms, but may cause performance degrade on other platforms.
@@ -219,7 +219,7 @@
 #undef CONFIG_PREALLOC_RECV_SKB
 #endif
 
-/* 
+/*
  * USB VENDOR REQ BUFFER ALLOCATION METHOD
  * if not set we'll use function local variable (stack memory)
  */
