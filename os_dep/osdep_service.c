@@ -1926,6 +1926,10 @@ int rtw_store_to_file(char *path, u8* buf, u32 sz)
 
 #if 1 //#ifdef MEM_ALLOC_REFINE_ADAPTOR
 #ifdef PLATFORM_LINUX
+static const struct device_type wlan_type = {
+	.name = "wlan",
+};
+
 struct net_device *rtw_alloc_etherdev_with_old_priv(int sizeof_priv, void *old_priv)
 {
 	struct net_device *pnetdev;
@@ -1939,6 +1943,7 @@ struct net_device *rtw_alloc_etherdev_with_old_priv(int sizeof_priv, void *old_p
 	if (!pnetdev)
 		goto RETURN;
 
+	pnetdev->dev.type = &wlan_type;
 	pnpi = netdev_priv(pnetdev);
 	pnpi->priv=old_priv;
 	pnpi->sizeof_priv=sizeof_priv;
