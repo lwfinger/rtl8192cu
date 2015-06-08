@@ -81,7 +81,7 @@ ifeq ($(CONFIG_RTL8192C), y)
 RTL871X = rtl8192c
 
 ifeq ($(CONFIG_USB_HCI), y)
-MODULE_NAME = 8192cu
+MODULE_NAME = rtl8192cu
 FW_FILES := hal/Hal8192CUHWImg.o
 ifneq ($(CONFIG_WAKE_ON_WLAN), n)
 FW_FILES += hal/Hal8192CUHWImg_wowlan.o
@@ -165,9 +165,9 @@ _HAL_INTFS_FILES :=	hal/hal_intf.o \
 			hal/$(RTL871X)_rxdesc.o \
 			hal/$(RTL871X)_cmd.o \
 			hal/$(HCI_NAME)_halinit.o \
-			hal/rtl$(MODULE_NAME)_led.o \
-			hal/rtl$(MODULE_NAME)_xmit.o \
-			hal/rtl$(MODULE_NAME)_recv.o
+			hal/$(MODULE_NAME)_led.o \
+			hal/$(MODULE_NAME)_xmit.o \
+			hal/$(MODULE_NAME)_recv.o
 
 ifeq ($(CONFIG_SDIO_HCI), y)
 _HAL_INTFS_FILES += hal/$(HCI_NAME)_ops.o
