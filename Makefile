@@ -573,8 +573,6 @@ strip:
 
 install:
 	install -p -m 644 $(MODULE_NAME).ko  $(MODDESTDIR)
-	modprobe -r rtl8192cu
-	echo "blacklist rtl8192cu" > /etc/modprobe.d/50-rtl8192cu.conf
 	/sbin/depmod -a ${KVER}
 
 uninstall:
