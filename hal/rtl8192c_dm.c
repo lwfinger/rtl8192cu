@@ -4442,18 +4442,18 @@ dm_SW_AntennaSwitch(
 		{
 			if(pdmpriv->TrafficLoad == TRAFFIC_HIGH)
 			{
-				_set_timer(&pdmpriv->SwAntennaSwitchTimer,10 ); //ms
+				_set_timer(&Adapter->SwAntennaSwitchTimer,10 ); //ms
 				//DBG_8192C("dm_SW_AntennaSwitch(): Test another antenna for 10 ms\n");
 			}
 			else if(pdmpriv->TrafficLoad == TRAFFIC_LOW)
 			{
-				_set_timer(&pdmpriv->SwAntennaSwitchTimer, 50 ); //ms
+				_set_timer(&Adapter->SwAntennaSwitchTimer, 50 ); //ms
 				//DBG_8192C("dm_SW_AntennaSwitch(): Test another antenna for 50 ms\n");
 			}
 	}
 	else
 	{
-			_set_timer(&pdmpriv->SwAntennaSwitchTimer, 500 ); //ms
+			_set_timer(&Adapter->SwAntennaSwitchTimer, 500 ); //ms
 			//DBG_8192C("dm_SW_AntennaSwitch(): Test another antenna for 500 ms\n");
 		}
 	}
@@ -4462,13 +4462,13 @@ dm_SW_AntennaSwitch(
 		if(pDM_SWAT_Table->TestMode == TP_MODE)
 		{
 			if(pdmpriv->TrafficLoad == TRAFFIC_HIGH)
-				_set_timer(&pdmpriv->SwAntennaSwitchTimer,90 ); //ms
+				_set_timer(&Adapter->SwAntennaSwitchTimer,90 ); //ms
 			else if(pdmpriv->TrafficLoad == TRAFFIC_LOW)
-				_set_timer(&pdmpriv->SwAntennaSwitchTimer,100 ); //ms
+				_set_timer(&Adapter->SwAntennaSwitchTimer,100 ); //ms
 		}
 		else
 		{
-			_set_timer(&pdmpriv->SwAntennaSwitchTimer,500 ); //ms
+			_set_timer(&Adapter->SwAntennaSwitchTimer,500 ); //ms
 			//DBG_8192C("dm_SW_AntennaSwitch(): Test another antenna for 500 ms\n");
 		}
 	}
@@ -4481,9 +4481,17 @@ dm_SW_AntennaSwitch(
 // 20100514 Luke/Joseph:
 // Callback function for 500ms antenna test trying.
 //
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 static void dm_SW_AntennaSwitchCallback(void *FunctionContext)
+#else
+static void dm_SW_AntennaSwitchCallback(struct timer_list *t)
+#endif
 {
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 	_adapter *padapter = (_adapter *)FunctionContext;
+#else
+	_adapter *padapter = from_timer(padapter, t, SwAntennaSwitchTimer);
+#endif
 
 	if(padapter->net_closed == _TRUE)
 			return;
@@ -4606,17 +4614,18 @@ void rtl8192c_init_dm_priv(IN PADAPTER Adapter)
 	//_rtw_memset(pdmpriv, 0, sizeof(struct dm_priv));
 
 #ifdef CONFIG_SW_ANTENNA_DIVERSITY
-	_init_timer(&(pdmpriv->SwAntennaSwitchTimer),  Adapter->pnetdev , dm_SW_AntennaSwitchCallback, Adapter);
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
+	_init_timer(&Adapter->SwAntennaSwitchTimer,  Adapter->pnetdev , dm_SW_AntennaSwitchCallback, Adapter);
+#else
+	timer_setup(&Adapter->SwAntennaSwitchTimer, dm_SW_AntennaSwitchCallback, 0);
+#endif
 #endif
 }
 
 void rtl8192c_deinit_dm_priv(IN PADAPTER Adapter)
 {
-	PHAL_DATA_TYPE	pHalData = GET_HAL_DATA(Adapter);
-	struct dm_priv	*pdmpriv = &pHalData->dmpriv;
-
 #ifdef CONFIG_SW_ANTENNA_DIVERSITY
-	_cancel_timer_ex(&pdmpriv->SwAntennaSwitchTimer);
+	_cancel_timer_ex(&Adapter->SwAntennaSwitchTimer);
 #endif
 }
 #ifdef CONFIG_HW_ANTENNA_DIVERSITY

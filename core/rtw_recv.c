@@ -41,7 +41,11 @@
 #include <circ_buf.h>
 
 #ifdef CONFIG_NEW_SIGNAL_STAT_PROCESS
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 void rtw_signal_stat_timer_hdl(RTW_TIMER_HDL_ARGS);
+#else
+void rtw_signal_stat_timer_hdl(struct timer_list *t);
+#endif
 #endif //CONFIG_NEW_SIGNAL_STAT_PROCESS
 
 
@@ -133,11 +137,11 @@ _func_enter_;
 	precvpriv->read_port_complete_other_urb_err_cnt = 0;
 
 #ifdef CONFIG_NEW_SIGNAL_STAT_PROCESS
-	#ifdef PLATFORM_LINUX
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 	_init_timer(&precvpriv->signal_stat_timer, padapter->pnetdev, RTW_TIMER_HDL_NAME(signal_stat), padapter);
-	#elif defined(PLATFORM_OS_CE) || defined(PLATFORM_WINDOWS)
-	_init_timer(&precvpriv->signal_stat_timer, padapter->hndis_adapter, RTW_TIMER_HDL_NAME(signal_stat), padapter);
-	#endif
+#else
+	timer_setup(&precvpriv->signal_stat_timer, RTW_TIMER_HDL_NAME(signal_stat), 0);
+#endif
 
 	precvpriv->signal_stat_sampling_interval = 1000; //ms
 	//precvpriv->signal_stat_converging_constant = 5000; //ms
@@ -4193,8 +4197,17 @@ _func_exit_;
 }
 
 #ifdef CONFIG_NEW_SIGNAL_STAT_PROCESS
-void rtw_signal_stat_timer_hdl(RTW_TIMER_HDL_ARGS){
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
+void rtw_signal_stat_timer_hdl(RTW_TIMER_HDL_ARGS)
+#else
+void rtw_signal_stat_timer_hdl(struct timer_list *t)
+#endif
+{
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 15, 0)
 	_adapter *adapter = (_adapter *)FunctionContext;
+#else
+	_adapter *adapter = from_timer(adapter, t, recvpriv.signal_stat_timer);
+#endif
 	struct recv_priv *recvpriv = &adapter->recvpriv;
 
 	u32 tmp_s, tmp_q;

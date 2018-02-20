@@ -470,6 +470,7 @@ struct _ADAPTER{
 	struct	pwrctrl_priv	pwrctrlpriv;
 	struct	eeprom_priv eeprompriv;
 	struct	led_priv	ledpriv;
+	_timer SwAntennaSwitchTimer;
 
 #ifdef CONFIG_MP_INCLUDED
        struct	mp_priv	mppriv;

@@ -444,7 +444,6 @@ struct	dm_priv
 	SWAT_T DM_SWAT_Table;
 #endif
 #ifdef CONFIG_SW_ANTENNA_DIVERSITY
-	_timer SwAntennaSwitchTimer;
 
 	u64	lastTxOkCnt;
 	u64	lastRxOkCnt;
