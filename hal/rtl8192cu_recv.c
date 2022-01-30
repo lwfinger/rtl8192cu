@@ -71,7 +71,7 @@ int	rtl8192cu_init_recv_priv(_adapter *padapter)
 
 #ifdef PLATFORM_LINUX
 	tasklet_init(&precvpriv->recv_tasklet,
-	     (void(*)(unsigned long))rtl8192cu_recv_tasklet,
+	     (void *)rtl8192cu_recv_tasklet,
 	     (unsigned long)padapter);
 #endif
 

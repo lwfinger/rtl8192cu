@@ -853,8 +853,11 @@ __inline static void _set_workitem(_workitem *pwork)
 	typedef int		thread_return;
 	typedef void*	thread_context;
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5, 17, 0)
 	#define thread_exit() complete_and_exit(NULL, 0)
-
+#else
+	#define thread_exit() kthread_complete_and_exit(NULL, 0)
+#endif
 	typedef void timer_hdl_return;
 	typedef void* timer_hdl_context;
 	typedef struct work_struct _workitem;
