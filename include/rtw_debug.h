@@ -193,6 +193,7 @@ extern void rtl871x_cedbg(const char *fmt, ...);
 
 #endif /* CONFIG_DEBUG_RTL871X */
 
+#undef _dbgdump
 
 #if	defined (_dbgdump) && defined (_MODULE_DEFINE_)
 
@@ -206,7 +207,8 @@ extern void rtl871x_cedbg(const char *fmt, ...);
 		}while(0)
 
 #endif
-
+#undef RT_TRACE
+#define RT_TRACE(_Comp, _Level, Fmt) do{}while(0)
 
 #if	defined (_dbgdump)
 
@@ -273,7 +275,7 @@ extern void rtl871x_cedbg(const char *fmt, ...);
 #endif
 
 #endif /* CONFIG_DEBUG_RTL819X */
-
+#undef	_dbgdump
 
 #ifdef PLATFORM_WINDOWS
 	#define DBG_871X do {} while(0)
